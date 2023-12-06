@@ -31,6 +31,7 @@ public class SocketServer {
             while (true) {
                 try {
                     String message = (String) ois.readObject();
+                    
                     System.out.println("Message Received from " + socket.getInetAddress().getHostAddress() + ": " + message);
                 } catch (IOException | ClassNotFoundException e) {
                     // Handle client disconnection
@@ -51,6 +52,11 @@ public class SocketServer {
             while (true) {
                 try {
                     String reply = reader.readLine();
+                    if(reply.equals("exit")) {
+                        // Close the socket
+                        socket.close();
+                        break;
+                    }
                     oos.writeObject(reply);
                     System.out.println("Message sent to " + socket.getInetAddress().getHostAddress() + ": " + reply);
                 } catch (IOException e) {

@@ -57,6 +57,11 @@ public class SocketClient {
             while (true) {
                 try {
                     String msg = reader.readLine();
+                    if(msg.equals("exit")) {
+                        // Close the socket
+                        socket.close();
+                        break;
+                    }
                     oos.writeObject(msg);
                     System.out.println("Message sent to server: " + msg);
                 } catch (IOException e) {
